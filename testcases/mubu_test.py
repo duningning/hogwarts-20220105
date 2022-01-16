@@ -18,6 +18,7 @@ class TestCaseMubu(HttpRunner):
             "host": "${get_test_host()}",
             "phone": "13271433391",
             "password": "ming6932058",
+            "folderId": "1ij2Ez2TdlN"
         })
     )#全局变量设置 #27
 
@@ -91,7 +92,7 @@ class TestCaseMubu(HttpRunner):
                     "Jwt-Token": "$jwttoken",
                 }
             )
-            .teardown_hook("${sleep(10)}")
+            .teardown_hook("${sleep(5)}")
             .validate()
             .assert_equal("status_code", 200)
         ),
@@ -208,9 +209,11 @@ class TestCaseMubu(HttpRunner):
                 }
             )
             .with_json({"start": ""})
+            .teardown_hook("${get_folders_num($response)}","folders_num")
             .validate()
             .assert_equal("status_code", 200)
             .assert_equal("body.code", 0)
+            .assert_greater_than("${folders_num}",0)
         ),
         Step(
             RunRequest("/v3/api/user/get_user_params")
@@ -356,7 +359,7 @@ class TestCaseMubu(HttpRunner):
                     "accept-language": "zh-CN,zh;q=0.9",
                 }
             )
-            .with_json({"folderId": 0, "source": "home"})
+            .with_json({"folderId": "$folderId", "source": "home"})
             .validate()
             .assert_equal("status_code", 200)
             .assert_equal("body.code", 0)
@@ -391,60 +394,60 @@ class TestCaseMubu(HttpRunner):
             .assert_equal("status_code", 200)
             .assert_equal("body.code", 0)
         ),
-        Step(
-            RunRequest("/v3/api/list/create_folder")
-            .options("/v3/api/list/create_folder")
-            .with_headers(
-                **{
-                    "accept": "*/*",
-                    "access-control-request-method": "POST",
-                    "access-control-request-headers": "content-type,data-unique-id,jwt-token,version,x-request-id",
-                    "origin": "https://${host}",
-                    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36",
-                    "sec-fetch-mode": "cors",
-                    "sec-fetch-site": "same-site",
-                    "sec-fetch-dest": "empty",
-                    "referer": "https://${host}/",
-                    "accept-encoding": "gzip, deflate, br",
-                    "accept-language": "zh-CN,zh;q=0.9",
-                }
-            )
-            .validate()
-            .assert_equal("status_code", 200)
-        ),
-        Step(
-            RunRequest("/v3/api/list/create_folder")
-            .post("/v3/api/list/create_folder")
-            .with_headers(
-                **{
-                    "content-length": "39",
-                    "sec-ch-ua": '" Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"',
-                    "version": "3.0.0-2.0.0.1824",
-                    "sec-ch-ua-mobile": "?0",
-                    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36",
-                    "data-unique-id": "9a835035-8ab3-4775-8c27-573185dc3663",
-                    "content-type": "application/json;charset=UTF-8",
-                    "accept": "application/json, text/plain, */*",
-                    "jwt-token": "$jwttoken",
-                    "x-request-id": "${gen_random_request_id()}",
-                    "sec-ch-ua-platform": '"macOS"',
-                    "origin": "https://${host}",
-                    "sec-fetch-site": "same-site",
-                    "sec-fetch-mode": "cors",
-                    "sec-fetch-dest": "empty",
-                    "referer": "https://${host}/",
-                    "accept-encoding": "gzip, deflate, br",
-                    "accept-language": "zh-CN,zh;q=0.9",
-                }
-            )
-            .with_json({"name": "hogworts-demo", "folderId": "0"})
-            .extract()
-            .with_jmespath("headers.server","server")
-            .with_jmespath("body.data.folder.id","folderId") #第一个参数folderId传递优化处理
-            .validate()
-            .assert_equal("status_code", 200)
-            .assert_equal("body.code", 0)
-        ),
+        # Step(
+        #     RunRequest("/v3/api/list/create_folder")
+        #     .options("/v3/api/list/create_folder")
+        #     .with_headers(
+        #         **{
+        #             "accept": "*/*",
+        #             "access-control-request-method": "POST",
+        #             "access-control-request-headers": "content-type,data-unique-id,jwt-token,version,x-request-id",
+        #             "origin": "https://${host}",
+        #             "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36",
+        #             "sec-fetch-mode": "cors",
+        #             "sec-fetch-site": "same-site",
+        #             "sec-fetch-dest": "empty",
+        #             "referer": "https://${host}/",
+        #             "accept-encoding": "gzip, deflate, br",
+        #             "accept-language": "zh-CN,zh;q=0.9",
+        #         }
+        #     )
+        #     .validate()
+        #     .assert_equal("status_code", 200)
+        # ),
+        # Step(
+        #     RunRequest("/v3/api/list/create_folder")
+        #     .post("/v3/api/list/create_folder")
+        #     .with_headers(
+        #         **{
+        #             "content-length": "39",
+        #             "sec-ch-ua": '" Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"',
+        #             "version": "3.0.0-2.0.0.1824",
+        #             "sec-ch-ua-mobile": "?0",
+        #             "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36",
+        #             "data-unique-id": "9a835035-8ab3-4775-8c27-573185dc3663",
+        #             "content-type": "application/json;charset=UTF-8",
+        #             "accept": "application/json, text/plain, */*",
+        #             "jwt-token": "$jwttoken",
+        #             "x-request-id": "${gen_random_request_id()}",
+        #             "sec-ch-ua-platform": '"macOS"',
+        #             "origin": "https://${host}",
+        #             "sec-fetch-site": "same-site",
+        #             "sec-fetch-mode": "cors",
+        #             "sec-fetch-dest": "empty",
+        #             "referer": "https://${host}/",
+        #             "accept-encoding": "gzip, deflate, br",
+        #             "accept-language": "zh-CN,zh;q=0.9",
+        #         }
+        #     )
+        #     .with_json({"name": "hogworts-demo", "folderId": "0"})
+        #     .extract()
+        #     .with_jmespath("headers.server","server")
+        #     .with_jmespath("body.data.folder.id","folderId") #第一个参数folderId传递优化处理
+        #     .validate()
+        #     .assert_equal("status_code", 200)
+        #     .assert_equal("body.code", 0)
+        # ),
         Step(
             RunRequest("/v3/api/notify/new_tip/get")
             .post("/v3/api/notify/new_tip/get")
@@ -970,10 +973,7 @@ class TestCaseMubu(HttpRunner):
                     "version": 0,
                     "documentId": "$docId",
                     "events": [
-                        {"name": "nameChanged", "title": "d", "original": ""},
-                        {"name": "nameChanged", "title": "de", "original": "d"},
-                        {"name": "nameChanged", "title": "dem", "original": "de"},
-                        {"name": "nameChanged", "title": "demo", "original": "dem"},
+                        {"name": "nameChanged", "title": "${get_random_string(10)}", "original": "dem"},
                     ],
                 }
             )

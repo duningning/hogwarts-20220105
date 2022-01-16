@@ -1,8 +1,13 @@
+import string
 import time
 import uuid
 import os
+import random
+
 
 from httprunner import __version__
+from httprunner.response import ResponseObject
+
 
 def gen_random_request_id():
     # request_id = str(uuid.uuid4())
@@ -28,3 +33,16 @@ def sum_two(m, n):
 
 def sleep(n_secs):
     time.sleep(n_secs)
+
+
+def get_folders_num(resp: ResponseObject)->int:
+    resp_json = resp.resp_obj.json()
+    folders_num = len(resp_json["data"]["folders"])#列表的数目
+    print(f"folders_num----{folders_num}")
+    return folders_num
+
+
+def get_random_string(str_len):
+    return "".join(
+        random.choice(string.ascii_letters+ string.digits) for _ in range(str_len)
+    )
