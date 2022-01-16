@@ -91,6 +91,7 @@ class TestCaseMubu(HttpRunner):
                     "Jwt-Token": "$jwttoken",
                 }
             )
+            .teardown_hook("${sleep(10)}")
             .validate()
             .assert_equal("status_code", 200)
         ),
@@ -122,7 +123,7 @@ class TestCaseMubu(HttpRunner):
             .validate()
             .assert_equal("status_code", 200)
             .assert_equal("body.code", 0)
-            .assert_greater_than("body.data.inviteCount",100)
+            #.assert_greater_than("body.data.inviteCount",0)
         ),
         Step(
             RunRequest("/v3/api/activity/five_years/participation")
