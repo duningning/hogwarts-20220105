@@ -396,27 +396,6 @@ class TestCaseMubu(HttpRunner):
         ),
         # Step(
         #     RunRequest("/v3/api/list/create_folder")
-        #     .options("/v3/api/list/create_folder")
-        #     .with_headers(
-        #         **{
-        #             "accept": "*/*",
-        #             "access-control-request-method": "POST",
-        #             "access-control-request-headers": "content-type,data-unique-id,jwt-token,version,x-request-id",
-        #             "origin": "https://${host}",
-        #             "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36",
-        #             "sec-fetch-mode": "cors",
-        #             "sec-fetch-site": "same-site",
-        #             "sec-fetch-dest": "empty",
-        #             "referer": "https://${host}/",
-        #             "accept-encoding": "gzip, deflate, br",
-        #             "accept-language": "zh-CN,zh;q=0.9",
-        #         }
-        #     )
-        #     .validate()
-        #     .assert_equal("status_code", 200)
-        # ),
-        # Step(
-        #     RunRequest("/v3/api/list/create_folder")
         #     .post("/v3/api/list/create_folder")
         #     .with_headers(
         #         **{
@@ -510,27 +489,6 @@ class TestCaseMubu(HttpRunner):
         ),
         Step(
             RunRequest("/v3/api/list/create_doc")
-            .options("/v3/api/list/create_doc")
-            .with_headers(
-                **{
-                    "accept": "*/*",
-                    "access-control-request-method": "POST",
-                    "access-control-request-headers": "content-type,data-unique-id,jwt-token,version,x-request-id",
-                    "origin": "https://${host}",
-                    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36",
-                    "sec-fetch-mode": "cors",
-                    "sec-fetch-site": "same-site",
-                    "sec-fetch-dest": "empty",
-                    "referer": "https://${host}/",
-                    "accept-encoding": "gzip, deflate, br",
-                    "accept-language": "zh-CN,zh;q=0.9",
-                }
-            )
-            .validate()
-            .assert_equal("status_code", 200)
-        ),
-        Step(
-            RunRequest("/v3/api/list/create_doc")
             .post("/v3/api/list/create_doc")
             .with_headers(
                 **{
@@ -593,27 +551,6 @@ class TestCaseMubu(HttpRunner):
         ),
         Step(
             RunRequest("/v3/api/document/edit/get")
-            .options("/v3/api/document/edit/get")
-            .with_headers(
-                **{
-                    "accept": "*/*",
-                    "access-control-request-method": "POST",
-                    "access-control-request-headers": "content-type,data-unique-id,jwt-token,version,x-request-id",
-                    "origin": "https://${host}",
-                    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36",
-                    "sec-fetch-mode": "cors",
-                    "sec-fetch-site": "same-site",
-                    "sec-fetch-dest": "empty",
-                    "referer": "https://${host}/",
-                    "accept-encoding": "gzip, deflate, br",
-                    "accept-language": "zh-CN,zh;q=0.9",
-                }
-            )
-            .validate()
-            .assert_equal("status_code", 200)
-        ),
-        Step(
-            RunRequest("/v3/api/document/edit/get")
             .post("/v3/api/document/edit/get")
             .with_headers(
                 **{
@@ -641,90 +578,6 @@ class TestCaseMubu(HttpRunner):
             .validate()
             .assert_equal("status_code", 200)
             .assert_equal("body.code", 0)
-        ),
-        Step(
-            RunRequest("/v3/api/colla/register")
-            .options("/v3/api/colla/register")
-            .with_headers(
-                **{
-                    "accept": "*/*",
-                    "access-control-request-method": "GET",
-                    "access-control-request-headers": "data-unique-id,jwt-token,x-request-id",
-                    "origin": "https://${host}",
-                    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36",
-                    "sec-fetch-mode": "cors",
-                    "sec-fetch-site": "same-site",
-                    "sec-fetch-dest": "empty",
-                    "referer": "https://${host}/",
-                    "accept-encoding": "gzip, deflate, br",
-                    "accept-language": "zh-CN,zh;q=0.9",
-                }
-            )
-            .validate()
-            .assert_equal("status_code", 200)
-        ),
-        Step(
-            RunRequest("/v3/api/colla/events")
-            .options("/v3/api/colla/events")
-            .with_headers(
-                **{
-                    "accept": "*/*",
-                    "access-control-request-method": "POST",
-                    "access-control-request-headers": "content-type,data-unique-id,jwt-token,x-request-id",
-                    "origin": "https://${host}",
-                    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36",
-                    "sec-fetch-mode": "cors",
-                    "sec-fetch-site": "same-site",
-                    "sec-fetch-dest": "empty",
-                    "referer": "https://${host}/",
-                    "accept-encoding": "gzip, deflate, br",
-                    "accept-language": "zh-CN,zh;q=0.9",
-                }
-            )
-            .validate()
-            .assert_equal("status_code", 200)
-        ),
-        Step(
-            RunRequest("/v3/api/refer/doc/list")
-            .options("/v3/api/refer/doc/list")
-            .with_headers(
-                **{
-                    "accept": "*/*",
-                    "access-control-request-method": "POST",
-                    "access-control-request-headers": "content-type,data-unique-id,jwt-token,x-request-id",
-                    "origin": "https://${host}",
-                    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36",
-                    "sec-fetch-mode": "cors",
-                    "sec-fetch-site": "same-site",
-                    "sec-fetch-dest": "empty",
-                    "referer": "https://${host}/",
-                    "accept-encoding": "gzip, deflate, br",
-                    "accept-language": "zh-CN,zh;q=0.9",
-                }
-            )
-            .validate()
-            .assert_equal("status_code", 200)
-        ),
-        Step(
-            RunRequest("/v3/api/refer/node/count")
-            .options("/v3/api/refer/node/count")
-            .with_headers(
-                **{
-                    "accept": "*/*",
-                    "access-control-request-method": "POST",
-                    "access-control-request-headers": "content-type,data-unique-id,jwt-token,version,x-request-id",
-                    "origin": "https://${host}",
-                    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36",
-                    "sec-fetch-mode": "cors",
-                    "sec-fetch-site": "same-site",
-                    "sec-fetch-dest": "empty",
-                    "referer": "https://${host}/",
-                    "accept-encoding": "gzip, deflate, br",
-                    "accept-language": "zh-CN,zh;q=0.9",
-                }
-            )
-            .validate()
-            .assert_equal("status_code", 200)
         ),
         Step(
             RunRequest("/v3/api/colla/events")
@@ -849,27 +702,6 @@ class TestCaseMubu(HttpRunner):
         ),
         Step(
             RunRequest("/v3/api/colla/members_v2")
-            .options("/v3/api/colla/members_v2")
-            .with_headers(
-                **{
-                    "accept": "*/*",
-                    "access-control-request-method": "POST",
-                    "access-control-request-headers": "content-type,data-unique-id,jwt-token,request-id,x-request-id",
-                    "origin": "https://${host}",
-                    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36",
-                    "sec-fetch-mode": "cors",
-                    "sec-fetch-site": "same-site",
-                    "sec-fetch-dest": "empty",
-                    "referer": "https://${host}/",
-                    "accept-encoding": "gzip, deflate, br",
-                    "accept-language": "zh-CN,zh;q=0.9",
-                }
-            )
-            .validate()
-            .assert_equal("status_code", 200)
-        ),
-        Step(
-            RunRequest("/v3/api/colla/members_v2")
             .post("/v3/api/colla/members_v2")
             .with_headers(
                 **{
@@ -983,27 +815,6 @@ class TestCaseMubu(HttpRunner):
         ),
         Step(
             RunRequest("/v3/api/refer/search_refers")
-            .options("/v3/api/refer/search_refers")
-            .with_headers(
-                **{
-                    "accept": "*/*",
-                    "access-control-request-method": "POST",
-                    "access-control-request-headers": "content-type,data-unique-id,jwt-token,x-request-id",
-                    "origin": "https://${host}",
-                    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36",
-                    "sec-fetch-mode": "cors",
-                    "sec-fetch-site": "same-site",
-                    "sec-fetch-dest": "empty",
-                    "referer": "https://${host}/",
-                    "accept-encoding": "gzip, deflate, br",
-                    "accept-language": "zh-CN,zh;q=0.9",
-                }
-            )
-            .validate()
-            .assert_equal("status_code", 200)
-        ),
-        Step(
-            RunRequest("/v3/api/refer/search_refers")
             .post("/v3/api/refer/search_refers")
             .with_headers(
                 **{
@@ -1026,7 +837,7 @@ class TestCaseMubu(HttpRunner):
                     "accept-language": "zh-CN,zh;q=0.9",
                 }
             )
-            .with_json({"docId": "$docId", "keywords": "demo", "option": 1})
+            .with_json({"docId": "$docId", "keywords": "demo",})
             .validate()
             .assert_equal("status_code", 200)
             .assert_equal("body.code", 0)
