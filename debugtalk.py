@@ -46,3 +46,7 @@ def get_random_string(str_len): #生成指定属谬随机字符串
     return "".join(
         random.choice(string.ascii_letters+ string.digits) for _ in range(str_len)
     )
+
+
+def get_memberId_list():
+    return ["5806779403337203"]
